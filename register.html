@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Register | BookForMe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <style>
+      .error {
+        color: red;
+        font-size: 0.875em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fh5co-wrapper">
+      <div id="fh5co-page">
+        <header id="fh5co-header">
+          <div class="container">
+            <h1 id="fh5co-logo"><a href="index.html">BookForMe</a></h1>
+          </div>
+        </header>
+
+        <div id="fh5co-register-section" class="fh5co-bg-color">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <div class="register-form">
+                  <h3 class="text-center">Register</h3>
+                  <form id="register-form" method="POST">
+                    <div class="form-group">
+                      <label for="first-name">First Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="first-name"
+                        name="firstName"
+                        placeholder="Enter your first name"
+                        required
+                      />
+                      <div class="error" id="error-firstName"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="last-name">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="last-name"
+                        name="lastName"
+                        placeholder="Enter your last name"
+                        required
+                      />
+                      <div class="error" id="error-lastName"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email address</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                      />
+                      <div class="error" id="error-email"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                      />
+                      <div class="error" id="error-password"></div>
+                    </div>
+                    <div class="form-group">
+                      <label for="contact">Contact</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="contact"
+                        name="contact"
+                        placeholder="Enter your contact number"
+                        required
+                      />
+                      <div class="error" id="error-contact"></div>
+                    </div>
+                    <div class="form-group text-center">
+                      <button type="submit" class="btn btn-primary">
+                        Register
+                      </button>
+                    </div>
+                  </form>
+                  <div class="text-center">
+                    <p>
+                      Already have an account?
+                      <a href="login.html">Login here</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer id="fh5co-footer">
+          <div class="container">
+            <p>&copy; 2024 BookForMe. All Rights Reserved.</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Clear previous errors
+          document
+            .querySelectorAll(".error")
+            .forEach((el) => (el.textContent = ""));
+
+          const formData = new FormData(this);
+          const data = {};
+          formData.forEach((value, key) => {
+            data[key] = value;
+          });
+
+          fetch("http://localhost:4050/api/auth/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                window.location.href = "login.html";
+              } else {
+                // Display validation errors
+                for (const [key, value] of Object.entries(data.errors)) {
+                  const errorElement = document.getElementById(`error-${key}`);
+                  if (errorElement) {
+                    errorElement.textContent = value;
+                  }
+                }
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("An error occurred. Please try again.");
+            });
+        });
+    </script>
+  </body>
+</html>

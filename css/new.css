@@ -1,0 +1,101 @@
+/* custom.css */
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+#fh5co-header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+}
+
+#fh5co-logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+/* Login Section */
+#fh5co-login-section {
+    background-color: #ffffff;
+    padding: 50px 0;
+}
+
+.login-form {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 5px;
+    border-color: #ced4da;
+    box-shadow: none;
+    font-size: 16px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Footer */
+#fh5co-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+#fh5co-footer p {
+    margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-form {
+        padding: 20px;
+    }
+}
