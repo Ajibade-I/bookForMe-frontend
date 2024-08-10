@@ -29,7 +29,7 @@
               <div class="col-md-6 col-md-offset-3">
                 <div class="register-form">
                   <h3 class="text-center">Register</h3>
-                  <form id="register-form" method="POST">
+                  <form id="register-form" method="POST" action="/register">
                     <div class="form-group">
                       <label for="first-name">First Name</label>
                       <input
@@ -116,49 +116,6 @@
       </div>
     </div>
 
-    <script>
-      document
-        .getElementById("register-form")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          // Clear previous errors
-          document
-            .querySelectorAll(".error")
-            .forEach((el) => (el.textContent = ""));
-
-          const formData = new FormData(this);
-          const data = {};
-          formData.forEach((value, key) => {
-            data[key] = value;
-          });
-
-          fetch("http://localhost:4050/api/auth/signup", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.success) {
-                window.location.href = "login.html";
-              } else {
-                // Display validation errors
-                for (const [key, value] of Object.entries(data.errors)) {
-                  const errorElement = document.getElementById(`error-${key}`);
-                  if (errorElement) {
-                    errorElement.textContent = value;
-                  }
-                }
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-              alert("An error occurred. Please try again.");
-            });
-        });
-    </script>
+    <script src="js/register.js"></script>
   </body>
 </html>
